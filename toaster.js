@@ -1,7 +1,7 @@
 class Toaster {
 
     show(options = {}) {
-        const { message = 'Notification', type = 'info', duration = this.duration, url, newTab, closeable, position, style } = options;
+        const { message = 'Notification', type = 'info', duration = this.duration, url, newTab, closeable, position, style, animation = "slideIn" } = options;
 
         // Create container if needed
         let container = document.querySelector(`.toaster-${position}`);
@@ -15,6 +15,7 @@ class Toaster {
         const toast = document.createElement('div');
         toast.style = style || '';
         toast.className = `toaster-message ${type}`;
+        toast.style.animation = animation + " 0.3s ease-in-out";
         if (position.includes('left')) {
             toast.innerHTML = `
             ${closeable ? '<button class="toaster-close">&times;</button>' : ''}

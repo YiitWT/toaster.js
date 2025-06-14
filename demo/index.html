@@ -4,14 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/YiitWT/toaster.js@latest/toaster.css">
-<script src="https://cdn.jsdelivr.net/gh/YiitWT/toaster.js@latest/toaster.js"></script></head>
+<link rel="stylesheet" href="../toaster.css">
+<script src="../toaster.js"></script></head>
 <body>
     <script>
         const toaster = new Toaster();
         toaster.error('Done!', {
+            animation: "slideIn",
             duration: 3000,
-            position: "top-left",
+            position: "top-right",
             url:"https://example.com",
             newTab: true,
             closeable: true,

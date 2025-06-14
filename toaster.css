@@ -79,7 +79,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    animation: slideIn 0.3s ease-in-out;
+   
 }
 
 .toaster-close {
