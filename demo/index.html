@@ -3,19 +3,465 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-<link rel="stylesheet" href="../toaster.css">
-<script src="../toaster.js"></script></head>
+    <title>Toaster.js Demo - Toast Notifications</title>
+    
+    <!-- Toaster CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/YiitWT/toaster.js@latest/toaster.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .demo-section {
+            padding: 40px;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #333;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .button-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .demo-btn {
+            padding: 15px 20px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .demo-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .btn-success {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .btn-error {
+            background: #f44336;
+            color: white;
+        }
+
+        .btn-warning {
+            background: #ff9800;
+            color: white;
+        }
+
+        .btn-info {
+            background: #2196F3;
+            color: white;
+        }
+
+        .btn-custom {
+            background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+            color: white;
+        }
+
+        .control-panel {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+
+        .control-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .control-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .control-item label {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        .control-item select,
+        .control-item input {
+            padding: 10px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .control-item select:focus,
+        .control-item input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin: 0;
+        }
+
+        .test-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .test-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .code-example {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+        }
+
+        .highlight {
+            color: #569cd6;
+        }
+
+        .string {
+            color: #ce9178;
+        }
+
+        .footer {
+            background: #f8f9fa;
+            padding: 30px;
+            text-align: center;
+            color: #666;
+        }
+
+        .github-link {
+            display: inline-block;
+            background: #333;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 15px;
+        }
+
+        .github-link:hover {
+            background: #000;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .button-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .control-group {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
 <body>
+    <div class="container">
+        <div class="header">
+            <h1>🍞 Toaster.js</h1>
+            <p>Beautiful toast notifications for your web applications</p>
+        </div>
+
+        <div class="demo-section">
+            <h2 class="section-title">Quick Demo</h2>
+            <div class="button-grid">
+                <button class="demo-btn btn-success" onclick="showSuccess()">✅ Success Toast</button>
+                <button class="demo-btn btn-error" onclick="showError()">❌ Error Toast</button>
+                <button class="demo-btn btn-warning" onclick="showWarning()">⚠️ Warning Toast</button>
+                <button class="demo-btn btn-info" onclick="showInfo()">ℹ️ Info Toast</button>
+                <button class="demo-btn btn-custom" onclick="showCustom()">✨ Custom Styled</button>
+                <button class="demo-btn btn-info" onclick="showClickable()">🔗 Clickable Toast</button>
+            </div>
+
+            <h2 class="section-title">Interactive Playground</h2>
+            <div class="control-panel">
+                <div class="control-group">
+                    <div class="control-item">
+                        <label for="message">Message:</label>
+                        <input type="text" id="message" value="This is a test notification!" placeholder="Enter your message">
+                    </div>
+                    
+                    <div class="control-item">
+                        <label for="type">Type:</label>
+                        <select id="type">
+                            <option value="success">Success</option>
+                            <option value="error">Error</option>
+                            <option value="warning">Warning</option>
+                            <option value="info" selected>Info</option>
+                        </select>
+                    </div>
+                    
+                    <div class="control-item">
+                        <label for="position">Position:</label>
+                        <select id="position">
+                            <option value="top-right" selected>Top Right</option>
+                            <option value="top-left">Top Left</option>
+                            <option value="top-center">Top Center</option>
+                            <option value="bottom-right">Bottom Right</option>
+                            <option value="bottom-left">Bottom Left</option>
+                            <option value="bottom-center">Bottom Center</option>
+                        </select>
+                    </div>
+                    
+                    <div class="control-item">
+                        <label for="duration">Duration (ms):</label>
+                        <input type="number" id="duration" value="3000" min="0" max="10000" step="500">
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <div class="control-item">
+                        <label for="customStyle">Custom Style:</label>
+                        <input type="text" id="customStyle" placeholder="background: #ff6b6b; border-radius: 20px;">
+                    </div>
+                    
+                    <div class="control-item">
+                        <label for="url">URL (optional):</label>
+                        <input type="text" id="url" placeholder="https://github.com/YiitWT/toaster.js">
+                    </div>
+                    
+                    <div class="control-item checkbox-group">
+                        <input type="checkbox" id="closeable">
+                        <label for="closeable">Show close button</label>
+                    </div>
+                    
+                    <div class="control-item checkbox-group">
+                        <input type="checkbox" id="newTab">
+                        <label for="newTab">Open URL in new tab</label>
+                    </div>
+                </div>
+                
+                <button class="test-btn" onclick="showCustomToast()">🚀 Test Your Toast</button>
+            </div>
+
+            <h2 class="section-title">Position Tests</h2>
+            <div class="button-grid">
+                <button class="demo-btn btn-info" onclick="testPosition('top-left')">📍 Top Left</button>
+                <button class="demo-btn btn-info" onclick="testPosition('top-center')">📍 Top Center</button>
+                <button class="demo-btn btn-info" onclick="testPosition('top-right')">📍 Top Right</button>
+                <button class="demo-btn btn-info" onclick="testPosition('bottom-left')">📍 Bottom Left</button>
+                <button class="demo-btn btn-info" onclick="testPosition('bottom-center')">📍 Bottom Center</button>
+                <button class="demo-btn btn-info" onclick="testPosition('bottom-right')">📍 Bottom Right</button>
+            </div>
+
+            <h2 class="section-title">Code Examples</h2>
+            <div class="code-example">
+<span class="highlight">// Basic usage</span>
+<span class="highlight">const</span> toaster = <span class="highlight">new</span> Toaster();
+
+toaster.<span class="highlight">success</span>(<span class="string">'Operation completed!'</span>);
+toaster.<span class="highlight">error</span>(<span class="string">'Something went wrong!'</span>);
+toaster.<span class="highlight">warning</span>(<span class="string">'Please check your input'</span>);
+toaster.<span class="highlight">info</span>(<span class="string">'Here\'s some information'</span>);
+
+<span class="highlight">// Advanced usage</span>
+toaster.<span class="highlight">show</span>({
+    message: <span class="string">'Custom notification'</span>,
+    type: <span class="string">'success'</span>,
+    position: <span class="string">'top-center'</span>,
+    duration: <span class="highlight">5000</span>,
+    closeable: <span class="highlight">true</span>,
+    style: <span class="string">'background: linear-gradient(45deg, #FF6B6B, #4ECDC4);'</span>,
+    url: <span class="string">'https://github.com/YiitWT/toaster.js'</span>,
+    newTab: <span class="highlight">true</span>
+});
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Made with ❤️ using Toaster.js</p>
+            <a href="https://github.com/YiitWT/toaster.js" class="github-link" target="_blank">
+                📦 View on GitHub
+            </a>
+        </div>
+    </div>
+
+    <!-- Toaster JavaScript -->
+    <script src="https://cdn.jsdelivr.net/gh/YiitWT/toaster.js@latest/toaster.js"></script>
+    
     <script>
+        // Initialize toaster
         const toaster = new Toaster();
-        toaster.error('Done!', {
-            animation: "slideIn",
-            duration: 3000,
-            position: "top-right",
-            url:"https://example.com",
-            newTab: true,
-            closeable: true,
+
+        // Quick demo functions
+        function showSuccess() {
+            toaster.success('✅ Operation completed successfully!', {
+                position: 'top-right',
+                duration: 3000,
+                closeable: true
+            });
+        }
+
+        function showError() {
+            toaster.error('❌ Something went wrong! Please try again.', {
+                position: 'top-right',
+                duration: 4000,
+                closeable: true
+            });
+        }
+
+        function showWarning() {
+            toaster.warning('⚠️ Please check your input before proceeding.', {
+                position: 'top-right',
+                duration: 3500,
+                closeable: true
+            });
+        }
+
+        function showInfo() {
+            toaster.info('ℹ️ Here\'s some helpful information for you.', {
+                position: 'top-right',
+                duration: 3000,
+                closeable: true
+            });
+        }
+
+        function showCustom() {
+            toaster.success('✨ This toast has custom styling!', {
+                position: 'top-right',
+                duration: 4000,
+                closeable: true,
+                style: 'background: linear-gradient(45deg, #FF6B6B, #4ECDC4); border-radius: 15px; font-weight: bold;'
+            });
+        }
+
+        function showClickable() {
+            toaster.info('🔗 Click me to visit GitHub!', {
+                position: 'top-center',
+                duration: 5000,
+                closeable: true,
+                url: 'https://github.com/YiitWT/toaster.js',
+                newTab: true,
+                style: 'cursor: pointer; background: #333; border: 2px solid #667eea;'
+            });
+        }
+
+        function testPosition(position) {
+            toaster.info(`📍 Toast positioned at: ${position}`, {
+                position: position,
+                duration: 2500,
+                closeable: true
+            });
+        }
+
+        function showCustomToast() {
+            const message = document.getElementById('message').value || 'Test notification';
+            const type = document.getElementById('type').value;
+            const position = document.getElementById('position').value;
+            const duration = parseInt(document.getElementById('duration').value) || 3000;
+            const customStyle = document.getElementById('customStyle').value;
+            const url = document.getElementById('url').value;
+            const closeable = document.getElementById('closeable').checked;
+            const newTab = document.getElementById('newTab').checked;
+
+            const options = {
+                message: message,
+                type: type,
+                position: position,
+                duration: duration,
+                closeable: closeable
+            };
+
+            if (customStyle) options.style = customStyle;
+            if (url) {
+                options.url = url;
+                options.newTab = newTab;
+            }
+
+            toaster.show(options);
+        }
+
+        // Demo sequence on page load
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                toaster.success('🎉 Welcome to Toaster.js Demo!', {
+                    position: 'top-center',
+                    duration: 4000,
+                    closeable: true,
+                    style: 'background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); font-size: 16px;'
+                });
+            }, 1000);
         });
     </script>
 </body>
