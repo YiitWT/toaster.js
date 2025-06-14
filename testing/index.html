@@ -10,7 +10,11 @@
 <body>
     <script>
         const toaster = new Toaster();
-        toaster.success('Done!');
+        toaster.success('Done!', {
+            url:"https://example.com",
+            newTab: true,
+            closeable: true,
+        });
     </script>
 </body>
 </html>

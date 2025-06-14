@@ -1,17 +1,13 @@
 class Toaster {
-    constructor(parameters = {}) {
-        this.position = parameters.position || 'top-right';
-        this.duration = parameters.duration || 3000;
-    }
 
     show(options = {}) {
-        const { message = 'Notification', type = 'info', duration = this.duration } = options;
+        const { message = 'Notification', type = 'info', duration = this.duration, url, newTab, closeable, position } = options;
 
-        // Create container if neede d
-        let container = document.querySelector(`.toaster-${this.position}`);
+        // Create container if needed
+        let container = document.querySelector(`.toaster-${position}`);
         if (!container) {
             container = document.createElement('div');
-            container.className = `toaster toaster-${this.position}`;
+            container.className = `toaster toaster-${position}`;
             document.body.appendChild(container);
         }
 
@@ -20,11 +16,24 @@ class Toaster {
         toast.className = `toaster-message ${type}`;
         toast.innerHTML = `
             <span>${message}</span>
-            <button class="toaster-close">×</button>
+            ${closeable ? '<button class="toaster-close">&times;</button>' : ''}
         `;
 
         // Add to container
         container.appendChild(toast);
+
+        //Clickable message
+
+        if (url) {
+            toast.style.cursor = 'pointer';
+            toast.onclick = () => {
+                if (newTab) {
+                    window.open(url, '_blank');
+                } else {
+                    window.location.href = url;
+                }
+            };
+        }
 
         // Close button
         toast.querySelector('.toaster-close').onclick = () => {
@@ -37,13 +46,10 @@ class Toaster {
         }
     }
 
-    success(message) { this.show({ message, type: 'success' }); }
-    error(message) { this.show({ message, type: 'error' }); }
-    warning(message) { this.show({ message, type: 'warning' }); }
-    info(message) { this.show({ message, type: 'info' }); }
+    success(message, options = {}) { this.show({ message, type: 'success', ...options }); }
+
+    error(message, options = {}) { this.show({ message, type: 'error', ...options }); }
+    warning(message, options = {}) { this.show({ message, type: 'warning', ...options }); }
+    info(message, options = {}) { this.show({ message, type: 'info', ...options }); }
 }
 
-// Usage:
-// const toaster = new Toaster();
-// toaster.success('Done!');
-// toaster.error('Failed!');
