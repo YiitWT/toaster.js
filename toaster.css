@@ -1,3 +1,4 @@
+
 .toaster-top-right {
     position: fixed;
     top: 20px;
@@ -70,6 +71,7 @@
 }
 
 .toaster-message {
+    font-family: Arial, sans-serif;
     padding: 12px 16px;
     border-radius: 4px;
     margin-bottom: 10px;

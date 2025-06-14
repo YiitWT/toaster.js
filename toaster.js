@@ -1,7 +1,7 @@
 class Toaster {
 
     show(options = {}) {
-        const { message = 'Notification', type = 'info', duration = this.duration, url, newTab, closeable, position } = options;
+        const { message = 'Notification', type = 'info', duration = this.duration, url, newTab, closeable, position, style } = options;
 
         // Create container if needed
         let container = document.querySelector(`.toaster-${position}`);
@@ -13,11 +13,20 @@ class Toaster {
 
         // Create toast
         const toast = document.createElement('div');
+        toast.style = style || '';
         toast.className = `toaster-message ${type}`;
-        toast.innerHTML = `
-            <span>${message}</span>
+        if (position.includes('left')) {
+            toast.innerHTML = `
             ${closeable ? '<button class="toaster-close">&times;</button>' : ''}
+            <span>${message}</span>
         `;
+        }
+        else {
+            toast.innerHTML = `
+            <span>${message}</span>
+            ${closeable ? '<button class="toaster-close ">&times;</button>' : ''}
+        `;
+        }
 
         // Add to container
         container.appendChild(toast);
@@ -40,14 +49,19 @@ class Toaster {
             toast.remove();
         };
 
-        // Auto remove
+        // Auto remove with fade out animation
         if (duration > 0) {
-            setTimeout(() => toast.remove(), duration);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transition = 'opacity 0.5s ease';
+                setTimeout(() => toast.remove(), 500);
+            }, duration);
+        } else if (duration === 0) {
+            toast.style.opacity = '1';
         }
     }
 
     success(message, options = {}) { this.show({ message, type: 'success', ...options }); }
-
     error(message, options = {}) { this.show({ message, type: 'error', ...options }); }
     warning(message, options = {}) { this.show({ message, type: 'warning', ...options }); }
     info(message, options = {}) { this.show({ message, type: 'info', ...options }); }
