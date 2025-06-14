@@ -1,7 +1,7 @@
 class Toaster {
 
     show(options = {}) {
-        const { message = 'Notification', type = 'info', duration = this.duration, url, newTab, closeable, position, style, animation = "slideIn" } = options;
+        const { message = 'Notification', type = 'info', duration = 1000, url, newTab = true, closeable = true, position = "top-right", style, animation = "slideIn" } = options;
 
         // Create container if needed
         let container = document.querySelector(`.toaster-${position}`);
