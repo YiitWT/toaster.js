@@ -5,7 +5,7 @@
 ![Size](https://img.shields.io/badge/Size-~2KB-blue?style=for-the-badge)
 ![No Dependencies](https://img.shields.io/badge/Dependencies-None-brightgreen?style=for-the-badge)
 <br/>
-![Visit The DEMO](https://yiitwt.github.io/toaster.js/demo/index.html)
+[Visit The Demo](https://yiitwt.github.io/toaster.js/demo/index.html)
 
 A lightweight, vanilla JavaScript toast notification library for displaying user-friendly messages in web applications.
 
