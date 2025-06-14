@@ -59,6 +59,7 @@ const toaster = new Toaster();
 // Show toast with custom options
 toaster.show({
     message: 'Custom notification',
+    animation: "slideIn",
     type: 'success',
     duration: 5000,
     position: 'top-right',
@@ -73,6 +74,7 @@ toaster.show({
 | Option | Type | Default | Description |
 |--------|------|---------|-------------|
 | `message` | string | 'Notification' | The text content of the toast |
+| `animation` | string | 'slideIn' | Uhh the animation |
 | `type` | string | 'info' | Toast type: 'success', 'error', 'warning', 'info' |
 | `duration` | number | `this.duration` | Time in milliseconds before auto-dismiss (0 = no auto-dismiss) |
 | `position` | string | - | Toast position (see positioning section) |
@@ -80,6 +82,7 @@ toaster.show({
 | `url` | string | - | URL to navigate to when toast is clicked |
 | `newTab` | boolean | false | Whether to open URL in new tab |
 | `style` | string | - | Additional inline CSS styles for the toast |
+
 
 ### Positioning
 
@@ -114,10 +117,10 @@ toaster.error('Custom error', {
 ### Animation Classes
 
 The CSS includes several animation classes you can apply:
-- `animate-fadeIn` - Smooth fade in
-- `animate-fadeOut` - Smooth fade out  
-- `animate-bounceIn` - Bouncy entrance
-- `animate-slideUp` - Slide up from bottom
+- `fadeIn` - Smooth fade in
+- `fadeOut` - Smooth fade out  
+- `bounceIn` - Bouncy entrance
+- `slideUp` - Slide up from bottom
 
 ### Clickable Toasts
 
